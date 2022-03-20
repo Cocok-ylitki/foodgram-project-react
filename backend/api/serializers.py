@@ -87,24 +87,24 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
         )
 
     def validate(self, data):
-        ingredients = self.initial_data.get('ingredients')
+        ingredients = data['ingredients']
         ingredients_set = set()
         for ingredient in ingredients:
             if type(ingredient.get('amount')) is str:
                 if not ingredient.get('amount').isdigit():
                     raise serializers.ValidationError(
-                        ('Количество ингредиента дольжно быть числом')
+                        ('Количество ингредиента должно быть числом')
                     )
             if int(ingredient.get('amount')) <= 0:
                 raise serializers.ValidationError(
                     ('Минимальное количество ингридиентов 1')
                 )
-            id = ingredient.get('id')
-            if id in ingredients_set:
+            ingredient_id = ingredient.get('id')
+            if ingredient_id in ingredients_set:
                 raise serializers.ValidationError(
                     'Ингредиент не должен повторяться.'
                 )
-            ingredients_set.add(id)
+            ingredients_set.add(ingredient_id)
         data['ingredients'] = ingredients
         return data
 
@@ -123,7 +123,7 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         ingredients = validated_data.pop('ingredients')
-        tags = self.initial_data.get('tags')
+        tags = validated_data['tags']
         recipe = super().create(validated_data)
         return self.add_tags_ingredients(
             recipe, ingredients=ingredients, tags=tags)
@@ -132,7 +132,7 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
         instance.ingredients.clear()
         instance.tags.clear()
         ingredients = validated_data.pop('ingredients')
-        tags = self.initial_data.get('tags')
+        tags = validated_data['tags']
         instance = self.add_tags_ingredients(
             instance, ingredients=ingredients, tags=tags)
         return super().update(instance, validated_data)

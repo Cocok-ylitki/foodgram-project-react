@@ -3,9 +3,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-77k097mb3$k2!f80dmfn_9c@d7=ypgsn20%qysdh^6(47j^&9s'
+SECRET_KEY = os.getenv('DJANGO_SECRET', default='django-insecure-77k097mb3$k2!f80dmfn_9c@d7=ypgsn20%qysdh^6(47j^&9s')
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
@@ -66,8 +65,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'foodgram.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -75,10 +72,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': os.getenv('DB_ENGINE', default='django.db.backends.postgresql'),
+#         'NAME': os.getenv('DB_NAME', default='postgres'),
+#         'USER': os.getenv('POSTGRES_USER', default='postgres'),
+#         'PASSWORD': os.getenv('POSTGRES_PASSWORD', default='postgres'),
+#         'HOST': os.getenv('DB_HOST', default='db'),
+#         'PORT': os.getenv('DB_PORT', default=5432)
+#     }
+# }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
