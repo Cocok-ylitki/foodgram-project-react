@@ -5,13 +5,13 @@ from django.db.models import Sum
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from djoser.views import UserViewSet
-from recipes.models import (Cart, Favorite, Ingredient, IngredientQuantity,
-                            Recipe, Tag)
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated
 from rest_framework.response import Response
 
+from recipes.models import (Cart, Favorite, Ingredient, IngredientQuantity,
+                            Recipe, Tag)
 from users.models import Follow
 
 from .filters import IngredientSearchFilter, RecipeFilter
