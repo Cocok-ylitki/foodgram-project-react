@@ -7,10 +7,6 @@ from rest_framework.validators import UniqueValidator
 
 from recipes.models import Ingredient, IngredientAmount, Recipe, Tag
 from users.models import Follow
-# С помощью isort делал импорты, а он модели смещал наверх
-# никак не мог понять в чем дело
-# БОЛЬШОЕ СПАСИБО ЗА ОТЛИЧНОЕ РЕВЬЮ
-# после проверки удалю комментарий
 
 User = get_user_model()
 
