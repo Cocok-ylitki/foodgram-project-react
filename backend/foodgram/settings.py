@@ -8,13 +8,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET', default='django-insecure-77k097mb3$k2!f8
 
 DEBUG = True
 
-ALLOWED_HOSTS = [
-    'localhost',
-    #os.getenv('IP_SERVER', default='127.0.0.1'),
-    'web',
-    '51.250.97.31',
-]
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
