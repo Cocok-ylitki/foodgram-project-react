@@ -76,7 +76,7 @@ class FollowViewSet(UserViewSet):
         follow.delete()
         return Response(status=HTTPStatus.NO_CONTENT)
 
-    @action(detail=False, permission_classes=(IsAuthenticated))
+    @action(detail=False, permission_classes=(IsAuthenticated,))
     def subscriptions(self, request):
         user = request.user
         queryset = Follow.objects.filter(user=user)
@@ -103,7 +103,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user)
 
     @action(detail=True, methods=['post'],
-            permission_classes=(IsAuthenticated))
+            permission_classes=(IsAuthenticated,))
     def favorite(self, request, pk=None):
         return self.add_obj(Favorite, request.user, pk)
 
@@ -112,7 +112,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         return self.delete_obj(Favorite, request.user, pk)
 
     @action(detail=True, methods=['post'],
-            permission_classes=(IsAuthenticated))
+            permission_classes=(IsAuthenticated,))
     def shopping_cart(self, request, pk=None):
         return self.add_obj(Cart, request.user, pk)
 
@@ -140,7 +140,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         }, status=HTTPStatus.BAD_REQUEST)
 
     @action(
-        detail=False, methods=['get'], permission_classes=(IsAuthenticated))
+        detail=False, methods=['get'], permission_classes=(IsAuthenticated,))
     def download_shopping_cart(self, request):
         ingredients = IngredientQuantity.objects.filter(
             recipe__shopping_cart__user=request.user).values(
