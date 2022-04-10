@@ -1,7 +1,8 @@
 from http import HTTPStatus
 
 from django.contrib.auth import get_user_model
-from django.db.models import Sum, BooleanField, Exists, OuterRef, Value
+from django.db.models import BooleanField, Exists, OuterRef, Value
+# Sum,
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from djoser.views import UserViewSet
@@ -10,8 +11,9 @@ from rest_framework.decorators import action
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated
 from rest_framework.response import Response
 
-from recipes.models import (Cart, Favorite, Ingredient, IngredientQuantity,
+from recipes.models import (Cart, Favorite, Ingredient,
                             Recipe, Tag)
+# IngredientQuantity,
 from users.models import Follow
 from .filters import IngredientSearchFilter, RecipeFilter
 from .pagination import LimitPageNumberPagination
