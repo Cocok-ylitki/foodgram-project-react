@@ -1,7 +1,7 @@
 from http import HTTPStatus
 
 from django.contrib.auth import get_user_model
-from django.db.models import Sum, BooleanField, Exists, OuterRef, Value
+from django.db.models import BooleanField, Exists, OuterRef, Sum, Value
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from djoser.views import UserViewSet
@@ -123,7 +123,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         return queryset
 
     @action(detail=True, methods=['post'],
-            permission_classes=(IsAuthenticated,))
+            permission_classes=[IsAuthenticated])
     def favorite(self, request, pk=None):
         return self.add_obj(Favorite, request.user, pk)
 
