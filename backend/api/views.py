@@ -120,7 +120,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
                 is_favorited=Value(False, output_field=BooleanField()),
                 is_in_shopping_cart=Value(False, output_field=BooleanField())
             )
-        return
+        return queryset
 
     @action(detail=True, methods=['post'],
             permission_classes=(IsAuthenticated,))
