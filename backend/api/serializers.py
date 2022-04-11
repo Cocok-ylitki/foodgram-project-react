@@ -91,10 +91,10 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
         ingredients = self.initial_data.get('ingredients')
         ingredients_set = set()
         for ingredient in ingredients:
-            if type(ingredient.get('amount')) == str:
+            if type(ingredient.get('amount')) is str:
                 if not ingredient.get('amount').isdigit():
                     raise serializers.ValidationError(
-                        ('Количество ингредиента дольжно быть числом')
+                        ('Количество ингредиента должно быть числом')
                     )
             if int(ingredient.get('amount')) <= 0:
                 raise serializers.ValidationError(
@@ -124,7 +124,7 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         ingredients = validated_data.pop('ingredients')
-        tags = validated_data['tags']
+        tags = self.initial_data.get('tags')
         recipe = super().create(validated_data)
         return self.add_tags_ingredients(
             recipe, ingredients=ingredients, tags=tags)
