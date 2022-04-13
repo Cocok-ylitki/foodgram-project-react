@@ -123,7 +123,7 @@ class RecipeWriteSerializer(serializers.ModelSerializer):
         return instance
 
     def create(self, validated_data):
-        ingredients = validated_data.pop('ingredients')
+        ingredients = validated_data.pop('ingredient')
         tags = self.initial_data.get('tags')
         recipe = super().create(validated_data)
         return self.add_tags_ingredients(
