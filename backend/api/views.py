@@ -165,12 +165,12 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def download_shopping_cart(self, request):
         ingredients = IngredientAmount.objects.filter(
             recipe__cart__user=request.user).values(
-            'ingredient__name',
-            'ingredient__measurement_unit').annotate(total=Sum('amount'))
+            'ingredients__name',
+            'ingredients__measurement_unit').annotate(total=Sum('amount'))
 
         shopping_cart = '\n'.join([
-            f'{ingredient["ingredient__name"]} - {ingredient["total"]} '
-            f'{ingredient["ingredient__measurement_unit"]}'
+            f'{ingredient["ingredients__name"]} - {ingredient["total"]} '
+            f'{ingredient["ingredients__measurement_unit"]}'
             for ingredient in ingredients
         ])
         filename = 'shopping_cart.txt'
