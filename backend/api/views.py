@@ -11,7 +11,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import SAFE_METHODS, IsAuthenticated
 from rest_framework.response import Response
 
-from recipes.models import (Cart, Favorite, Ingredient, IngredientQuantity,
+from recipes.models import (Cart, Favorite, Ingredient, IngredientAmount,
                             Recipe, Tag)
 from users.models import Follow
 from .filters import IngredientSearchFilter, RecipeFilter
@@ -163,7 +163,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     @action(
         detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def download_shopping_cart(self, request):
-        ingredients = IngredientQuantity.objects.filter(
+        ingredients = IngredientAmount.objects.filter(
             recipe__cart__user=request.user).values(
             'ingredient__name',
             'ingredient__measurement_unit').annotate(total=Sum('amount'))
