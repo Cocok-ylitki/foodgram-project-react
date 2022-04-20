@@ -9,25 +9,14 @@
 ## Проект доступен по ссылке:
 ### http://51.250.97.31/
 
-
-В репозитории на Гитхабе добавьте данные в `Settings - Secrets - Actions secrets`:
+## Наполнение env-файла:
 ```py
-DOCKER_USERNAME - имя пользователя в DockerHub
-DOCKER_PASSWORD - пароль пользователя в DockerHub
-HOST - ip-адрес сервера
-USER - пользователь
-SSH_KEY - приватный ssh-ключ (публичный должен быть на сервере)
-PASSPHRASE - кодовая фраза для ssh-ключа
-DB_ENGINE - django.db.backends.postgresql
-DB_HOST - db
-DB_PORT - 5432
-SECRET_KEY - секретный ключ приложения django (необходимо чтобы были экранированы или отсутствовали скобки)
-ALLOWED_HOSTS - список разрешённых адресов
-TELEGRAM_TO - id своего телеграм-аккаунта (можно узнать у @userinfobot, команда /start)
-TELEGRAM_TOKEN - токен бота (получить токен можно у @BotFather, /token, имя бота)
-DB_NAME - postgres (по умолчанию)
-POSTGRES_USER - postgres (по умолчанию)
-POSTGRES_PASSWORD - postgres (по умолчанию)
+- DB_ENGINE=django.db.backends.postgresql - используемая БД
+- DB_NAME=postgres - имя БД
+- POSTGRES_USER - логин для подключения к БД
+- POSTGRES_PASSWORD - пароль для подключения к БД
+- DB_HOST - название сервиса (контейнера)
+- DB_PORT - порт для подключения к БД
 ```
 
 ## Как запустить проект в контейнерах:
