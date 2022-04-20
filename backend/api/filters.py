@@ -4,8 +4,6 @@ from django_filters.widgets import BooleanWidget
 from rest_framework.filters import SearchFilter
 
 from recipes.models import Recipe
-# Tag
-# from users.models import User
 
 
 class IngredientSearchFilter(SearchFilter):

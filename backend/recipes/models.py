@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.core import validators
-from django.core.validators import MinValueValidator
 from django.db import models
 
 User = get_user_model()
@@ -113,32 +112,6 @@ class IngredientAmount(models.Model):
 
     def __str__(self):
         return f'{self.ingredients.name} - {self.amount}'
-
-
-class IngredientQuantity(models.Model):
-    ingredient = models.ForeignKey(
-        Ingredient, on_delete=models.CASCADE, verbose_name='Ингредиент'
-    )
-    recipe = models.ForeignKey(
-        Recipe, on_delete=models.CASCADE, verbose_name='Рецепт'
-    )
-    amount = models.PositiveSmallIntegerField(
-        verbose_name='Количество',
-        validators=[
-            MinValueValidator(1, message='Количество должно быть больше 0!')
-        ]
-    )
-
-    class Meta:
-        ordering = ['-id']
-        constraints = [
-            models.UniqueConstraint(
-                fields=['ingredient', 'recipe'],
-                name='unique_ingredients_in_recipe'
-            )
-        ]
-        verbose_name = 'Количество ингредиента'
-        verbose_name_plural = 'Количество ингредиентов'
 
 
 class Cart(models.Model):
