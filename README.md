@@ -63,11 +63,8 @@ docker-compose exec backend python manage.py createsuperuser
     docker-compose exec backend python manage.py shell 
     ```
     ```
-    >>> exec(open("backend/data/filldb.py").read())
-    ```
-    ```
-    docker-compose exec backend
-    ```
+    exec(open("backend/data/filldb.py").read())
+    ``` 
 
 
 ## Автор
