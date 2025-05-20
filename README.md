@@ -69,11 +69,6 @@ docker-compose exec backend python manage.py createsuperuser
     docker-compose exec backend
     ```
 
-### Для наполнения базы данных ингредиентами необходимо применить следующую команду:
-
-```
-docker-compose exec backend python manage.py load_ingredients
-```
 
 ## Автор
 
